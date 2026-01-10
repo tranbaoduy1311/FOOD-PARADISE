@@ -1,0 +1,84 @@
+/* --- KHUNG CHỨA (CARD) --- */
+.admin-card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md;
+}
+
+/* --- TIÊU ĐỀ --- */
+.admin-title {
+  @apply text-2xl font-extrabold text-gray-800 mb-1 tracking-tight;
+}
+.admin-subtitle {
+  @apply text-sm text-gray-500 font-medium mb-6;
+}
+
+/* --- Ô NHẬP LIỆU (INPUT) --- */
+.admin-input {
+  @apply w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-gray-50 text-gray-700
+  focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 
+  outline-none transition-all duration-200;
+}
+
+/* --- CÁC LOẠI NÚT BẤM (BUTTONS) --- */
+.admin-btn {
+  @apply px-4 py-2 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-sm active:scale-95;
+}
+
+/* Nút chính (Xanh dương) */
+.admin-btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg;
+}
+
+/* Nút thêm mới (Xanh lá - Gradient) */
+.admin-btn-create {
+  @apply bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 px-6 rounded-xl text-base hover:shadow-xl hover:-translate-y-0.5;
+}
+
+/* Nút sửa (Vàng) */
+.admin-btn-edit {
+  @apply bg-yellow-50 text-yellow-600 border border-yellow-200 hover:bg-yellow-500 hover:text-white;
+}
+
+/* Nút xóa (Đỏ) */
+.admin-btn-delete {
+  @apply bg-red-50 text-red-600 border border-red-200 hover:bg-red-600 hover:text-white;
+}
+
+/* --- BẢNG DỮ LIỆU (TABLE) --- */
+.admin-table-container {
+  @apply overflow-hidden rounded-xl border border-gray-200 shadow-sm;
+}
+
+.admin-table {
+  @apply w-full text-left border-collapse bg-white;
+}
+
+.admin-table thead tr {
+  @apply bg-gray-100 text-gray-600 uppercase text-xs font-bold tracking-wider;
+}
+
+.admin-table th {
+  @apply py-4 px-6 border-b border-gray-200;
+}
+
+.admin-table td {
+  @apply py-4 px-6 border-b border-gray-100 text-gray-700 text-sm font-medium;
+}
+
+.admin-table tbody tr {
+  @apply transition-colors duration-150;
+}
+
+.admin-table tbody tr:hover {
+  @apply bg-blue-50; 
+}
+
+/* --- NHÃN TRẠNG THÁI (BADGE) --- */
+.admin-badge {
+  @apply px-3 py-1 rounded-full text-xs font-bold uppercase;
+}
+.admin-badge-success {
+  @apply bg-green-100 text-green-700;
+}
+.admin-badge-warning {
+  @apply bg-yellow-100 text-yellow-700;
+}

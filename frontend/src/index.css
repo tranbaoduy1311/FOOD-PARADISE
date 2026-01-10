@@ -1,0 +1,80 @@
+/* --- 1. Import Font chữ Nunito (Tròn trịa, hiện đại) --- */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+/* --- 2. Tailwind Directives --- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- 3. Cấu hình chung toàn trang --- */
+@layer base {
+  html {
+    font-family: 'Nunito', sans-serif;
+    color: #374151; /* Màu chữ xám đen dịu mắt */
+    -webkit-font-smoothing: antialiased; /* Làm mượt chữ */
+  }
+  body {
+    @apply bg-gray-50; /* Nền xám nhẹ mặc định */
+  }
+}
+
+/* --- 4. Tùy chỉnh thanh cuộn (Scrollbar) cho đẹp --- */
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Màu thanh cuộn */
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* Màu khi di chuột vào */
+}
+
+
+
+/* --- ANIMATIONS CHO TRANG CHỦ --- */
+
+/* 1. Hiệu ứng Fade In Up (Hiện dần từ dưới lên) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Delay cho các phần tử xuất hiện lần lượt */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* 2. Hiệu ứng Parallax (Ảnh nền trượt chậm) */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Hiệu ứng trôi nổi nhẹ nhàng */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}

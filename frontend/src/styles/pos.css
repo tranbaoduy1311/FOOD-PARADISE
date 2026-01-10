@@ -1,0 +1,87 @@
+/* --- BỐ CỤC CHUNG --- */
+.pos-container {
+  @apply flex h-screen bg-gray-100 overflow-hidden font-sans;
+}
+
+/* --- KHU VỰC DANH SÁCH MÓN (BÊN TRÁI) --- */
+.pos-menu-section {
+  @apply w-2/3 p-6 overflow-y-auto;
+}
+
+.pos-grid {
+  @apply grid grid-cols-3 gap-6 pb-10; 
+}
+
+/* --- THẺ MÓN ĂN (PRODUCT CARD) --- */
+.pos-card {
+  @apply bg-white rounded-2xl shadow-sm border border-transparent cursor-pointer overflow-hidden relative
+  transition-all duration-300 ease-out
+  hover:shadow-xl hover:-translate-y-1 hover:border-orange-400;
+}
+
+.pos-card-img {
+  @apply w-full h-40 object-cover transition-transform duration-500;
+}
+
+.pos-card:hover .pos-card-img {
+  @apply scale-110; 
+}
+
+.pos-card-content {
+  @apply p-4;
+}
+
+.pos-card-title {
+  @apply font-bold text-gray-800 text-lg mb-1 truncate;
+}
+
+.pos-card-price {
+  @apply text-orange-600 font-extrabold text-xl;
+}
+
+/* --- KHU VỰC GIỎ HÀNG (BÊN PHẢI) --- */
+.pos-cart-section {
+  @apply w-1/3 bg-white shadow-2xl flex flex-col border-l border-gray-200 z-10;
+}
+
+.pos-cart-header {
+  @apply p-5 border-b border-gray-100 bg-gray-50;
+}
+
+.pos-cart-items-container {
+  @apply flex-1 overflow-y-auto p-4 space-y-3;
+}
+
+/* Dòng món ăn trong giỏ */
+.pos-cart-item {
+  @apply flex justify-between items-center p-3 rounded-xl border border-gray-100 bg-white shadow-sm transition-colors hover:border-orange-200;
+}
+
+.pos-cart-item-name {
+  @apply font-bold text-gray-800 text-sm mb-1;
+}
+
+.pos-cart-item-qty {
+  @apply text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded-md;
+}
+
+/* --- KHU VỰC THANH TOÁN (BOTTOM) --- */
+.pos-checkout-section {
+  @apply p-5 border-t border-gray-100 bg-gray-50;
+}
+
+.pos-total-row {
+  @apply flex justify-between items-center mb-4 text-gray-600;
+}
+
+.pos-total-final {
+  @apply flex justify-between items-center mb-6 text-2xl font-extrabold text-gray-900;
+}
+
+/* Nút thanh toán khổng lồ */
+.pos-btn-checkout {
+  @apply w-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-xl font-bold py-4 rounded-2xl
+  shadow-lg shadow-orange-200
+  hover:shadow-xl hover:scale-[1.02] hover:from-orange-600 hover:to-red-600
+  active:scale-95 transition-all duration-200;
+}
