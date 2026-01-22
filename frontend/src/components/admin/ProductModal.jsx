@@ -13,7 +13,7 @@ const ProductModal = ({ onClose, onSave }) => {
 
     useEffect(() => {
         // Lấy danh sách danh mục để đổ vào dropdown
-        axios.get('http://localhost:8080/api/categories')
+        axios.get('/api/categories')
             .then(res => setCategories(res.data))
             .catch(err => console.error("Lỗi lấy danh mục:", err));
     }, []);
@@ -30,7 +30,7 @@ const ProductModal = ({ onClose, onSave }) => {
             category: { id: parseInt(formData.categoryId) }
         };
 
-        axios.post('http://localhost:8080/api/products', payload)
+        axios.post('/api/products', payload)
             .then(() => {
                 alert("Thêm món thành công!");
                 onSave(); // Load lại danh sách

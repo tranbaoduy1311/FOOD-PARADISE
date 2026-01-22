@@ -10,11 +10,11 @@ const TimekeepingManager = () => {
   const fetchData = async () => {
     try {
       // Lấy danh sách nhân viên
-      const empRes = await axios.get('http://localhost:8080/api/admin/employees');
+      const empRes = await axios.get('/api/admin/employees');
       setEmployees(empRes.data);
 
       // Lấy lịch sử chấm công
-      const attRes = await axios.get('http://localhost:8080/api/attendance');
+      const attRes = await axios.get('/api/attendance');
       setAttendanceHistory(attRes.data);
 
       // Xác định ai đang làm việc
@@ -39,7 +39,7 @@ const TimekeepingManager = () => {
 
   // Xử lý Check-in
   const handleCheckIn = (empId) => {
-    axios.post(`http://localhost:8080/api/attendance/check-in?employeeId=${empId}`)
+    axios.post(`/api/attendance/check-in?employeeId=${empId}`)
       .then(() => {
         alert("✅ Check-in thành công!");
         fetchData();
@@ -55,7 +55,7 @@ const TimekeepingManager = () => {
     const ot = prompt("Nhập số giờ tăng ca (nếu có, mặc định 0):", "0");
     if (ot === null) return; 
 
-    axios.post(`http://localhost:8080/api/attendance/check-out?employeeId=${empId}&overtime=${ot}`)
+    axios.post(`/api/attendance/check-out?employeeId=${empId}&overtime=${ot}`)
       .then(() => {
         alert("👋 Check-out thành công!");
         fetchData();

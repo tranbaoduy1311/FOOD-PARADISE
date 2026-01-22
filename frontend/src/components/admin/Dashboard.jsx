@@ -22,14 +22,14 @@ const Dashboard = () => {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/dashboard/stats')
+    axios.get('/api/dashboard/stats')
       .then(res => setStats(res.data))
       .catch(err => console.error(err));
   }, []);
 
   // 1. Hàm mở danh sách đơn hàng hôm nay
   const handleShowRevenueDetails = () => {
-    axios.get('http://localhost:8080/api/dashboard/orders/today')
+    axios.get('/api/dashboard/orders/today')
       .then(res => {
         setTodayOrders(res.data);
         setShowRevenueModal(true);
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   // 2. Hàm xem chi tiết món ăn của 1 đơn (Khi bấm vào dòng đơn hàng)
   const handleViewOrderItems = (orderId) => {
-    axios.get(`http://localhost:8080/api/orders/${orderId}/details`)
+    axios.get(`/api/orders/${orderId}/details`)
       .then(res => {
         setSelectedOrderDetails(res.data);
         setSelectedOrderId(orderId);

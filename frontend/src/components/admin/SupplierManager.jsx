@@ -17,7 +17,7 @@ const SupplierManager = () => {
     // --- 1. KHAI BÁO HÀM BÌNH THƯỜNG (Không cần useCallback) ---
     const fetchSuppliers = async () => {
         try {
-            const res = await axios.get('http://localhost:8080/api/admin/suppliers');
+            const res = await axios.get('/api/admin/suppliers');
             setSuppliers(res.data);
         } catch (error) { 
             console.error(error);
@@ -35,9 +35,9 @@ const SupplierManager = () => {
     const handleSave = async () => {
         try {
             if (editingId) {
-                await axios.put(`http://localhost:8080/api/admin/suppliers/${editingId}`, formData);
+                await axios.put(`/api/admin/suppliers/${editingId}`, formData);
             } else {
-                await axios.post('http://localhost:8080/api/admin/suppliers', formData);
+                await axios.post('/api/admin/suppliers', formData);
             }
             setIsModalOpen(false);
             fetchSuppliers(); // Gọi lại hàm để refresh danh sách
@@ -57,7 +57,7 @@ const SupplierManager = () => {
     const handleDelete = async (id) => {
         if(window.confirm("Xóa nhà cung cấp này?")) {
             try {
-                await axios.delete(`http://localhost:8080/api/admin/suppliers/${id}`);
+                await axios.delete(`/api/admin/suppliers/${id}`);
                 fetchSuppliers();
             } catch (error) {
                 console.error(error);
@@ -75,7 +75,7 @@ const SupplierManager = () => {
     const handlePayDebt = async () => {
         if(!selectedSupplier || payAmount <= 0) return;
         try {
-            await axios.post(`http://localhost:8080/api/admin/suppliers/${selectedSupplier.id}/pay-debt?amount=${payAmount}`);
+            await axios.post(`/api/admin/suppliers/${selectedSupplier.id}/pay-debt?amount=${payAmount}`);
             setIsPayModalOpen(false);
             fetchSuppliers();
             alert(`Đã trả ${payAmount.toLocaleString()}đ cho ${selectedSupplier.name}`);

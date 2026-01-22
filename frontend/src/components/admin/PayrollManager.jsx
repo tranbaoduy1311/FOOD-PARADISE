@@ -18,7 +18,7 @@ const PayrollManager = () => {
 
     const fetchPayrolls = async () => {
         try {
-            const res = await axios.get(`http://localhost:8080/api/admin/payrolls?month=${month}&year=${year}`);
+            const res = await axios.get(`/api/admin/payrolls?month=${month}&year=${year}`);
             setPayrolls(res.data);
         } catch (error) {
             console.error(error);
@@ -34,7 +34,7 @@ const PayrollManager = () => {
         
         setLoading(true);
         try {
-            const res = await axios.post(`http://localhost:8080/api/admin/payrolls/calculate?month=${month}&year=${year}`);
+            const res = await axios.post(`/api/admin/payrolls/calculate?month=${month}&year=${year}`);
             setPayrolls(res.data);
             alert("Tính lương thành công!");
         } catch (error) {

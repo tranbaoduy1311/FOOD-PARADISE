@@ -10,7 +10,7 @@ import axios from 'axios';
 const RENDER_URL = "https://pos-backend-api-fs6z.onrender.com"; 
 
 // Tự động chọn: Nếu chạy trên mạng (Vercel) thì dùng Render, chạy ở máy thì dùng Localhost
-axios.defaults.baseURL = import.meta.env.PROD ? RENDER_URL : "http://localhost:8080";
+axios.defaults.baseURL = import.meta.env.PROD ? RENDER_URL : "";
 // ------------------------
 
 ReactDOM.createRoot(document.getElementById('root')).render(

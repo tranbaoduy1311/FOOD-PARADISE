@@ -25,9 +25,9 @@ const IngredientManager = () => {
   const [editForm, setEditForm] = useState({});
 
   // --- API CALLS ---
-  const fetchIngredients = () => axios.get('http://localhost:8080/api/admin/ingredients').then(res => setIngredients(res.data));
-  const fetchHistory = () => axios.get('http://localhost:8080/api/admin/ingredients/history/today').then(res => setImportHistory(res.data));
-  const fetchSuppliers = () => axios.get('http://localhost:8080/api/admin/suppliers').then(res => setSuppliers(res.data)); // --- MỚI
+  const fetchIngredients = () => axios.get('/api/admin/ingredients').then(res => setIngredients(res.data));
+  const fetchHistory = () => axios.get('/api/admin/ingredients/history/today').then(res => setImportHistory(res.data));
+  const fetchSuppliers = () => axios.get('/api/admin/suppliers').then(res => setSuppliers(res.data)); // --- MỚI
 
   useEffect(() => { 
     fetchIngredients(); 
@@ -45,7 +45,7 @@ const IngredientManager = () => {
 
     try {
       // 1. Tạo nguyên liệu mới
-      const createRes = await axios.post('http://localhost:8080/api/admin/ingredients', {
+      const createRes = await axios.post('/api/admin/ingredients', {
         name: quickItem.name,
         unit: quickItem.unit,
         costPrice: quickItem.costPrice || 0,
@@ -53,7 +53,7 @@ const IngredientManager = () => {
       });
 
       // 2. Gọi API nhập kho (Kèm NCC và Công nợ)
-      await axios.post(`http://localhost:8080/api/admin/ingredients/import`, null, {
+      await axios.post(`/api/admin/ingredients/import`, null, {
         params: {
             id: createRes.data.id,
             quantity: quickItem.quantity,
@@ -82,7 +82,7 @@ const IngredientManager = () => {
     if(!amount || amount <= 0) return alert("Số lượng không hợp lệ!");
     if (options.isDebt && !options.supplierId) return alert("Vui lòng chọn Nhà cung cấp để ghi nợ!");
     
-    axios.post(`http://localhost:8080/api/admin/ingredients/import`, null, {
+    axios.post(`/api/admin/ingredients/import`, null, {
         params: {
             id: id,
             quantity: amount,
@@ -114,7 +114,7 @@ const IngredientManager = () => {
   };
 
   const saveEdit = () => {
-    axios.put(`http://localhost:8080/api/admin/ingredients/${editingId}`, editForm)
+    axios.put(`/api/admin/ingredients/${editingId}`, editForm)
       .then(() => {
         alert("Cập nhật thành công!");
         setEditingId(null);

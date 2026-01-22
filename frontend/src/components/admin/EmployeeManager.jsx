@@ -29,7 +29,7 @@ const EmployeeManager = () => {
 // Cập nhật hàm fetchEmployees để kiểm tra lỗi
   const fetchEmployees = () => {
     console.log("Đang gọi API lấy danh sách nhân viên...");
-    axios.get('http://localhost:8080/api/admin/employees')
+    axios.get('/api/admin/employees')
       .then(res => {
         console.log("Dữ liệu nhận được từ Backend:", res.data);
         // Đảm bảo res.data là một mảng, nếu không thì để mảng rỗng
@@ -78,8 +78,8 @@ const EmployeeManager = () => {
     }
 
     const apiCall = isEditing 
-      ? axios.put(`http://localhost:8080/api/admin/employees/${editingId}`, form)
-      : axios.post('http://localhost:8080/api/admin/employees', form);
+      ? axios.put(`/api/admin/employees/${editingId}`, form)
+      : axios.post('/api/admin/employees', form);
 
     apiCall.then(() => {
       alert(isEditing ? "Cập nhật thành công!" : "Thêm mới thành công!");
@@ -93,7 +93,7 @@ const EmployeeManager = () => {
   // 5. Xử lý Xóa nhân viên (Đã thêm lại)
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc muốn xóa nhân viên này?")) {
-      axios.delete(`http://localhost:8080/api/admin/employees/${id}`)
+      axios.delete(`/api/admin/employees/${id}`)
         .then(() => {
           alert("Đã xóa nhân viên thành công!");
           fetchEmployees();

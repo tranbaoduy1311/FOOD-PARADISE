@@ -45,7 +45,7 @@ const PosPage = () => {
       const busyTables = listToUse.filter(t => t.status === 'Có khách');
       const ordersMap = {};
       for (const table of busyTables) {
-        const res = await axios.get(`http://localhost:8080/api/orders/table/${table.id}`);
+        const res = await axios.get(`/api/orders/table/${table.id}`);
         if (res.data) {
           ordersMap[table.id] = {
             total: res.data.totalPrice,
@@ -58,7 +58,7 @@ const PosPage = () => {
   }, [tables]);
 
   const fetchTables = useCallback(() => {
-    axios.get('http://localhost:8080/api/tables')
+    axios.get('/api/tables')
       .then(res => {
         setTables(res.data);
         fetchAllActiveOrders(res.data); 
@@ -68,27 +68,27 @@ const PosPage = () => {
 
   const fetchProducts = async () => {
     try {
-        const res = await axios.get('http://localhost:8080/api/products');
+        const res = await axios.get('/api/products');
         setProducts(res.data);
     } catch (err) { console.error(err); }
   };
 
   const fetchCategories = async () => {
     try {
-        const res = await axios.get('http://localhost:8080/api/categories');
+        const res = await axios.get('/api/categories');
         setCategories(res.data);
     } catch (err) { console.error(err); }
   };
   
   const fetchVouchers = async () => {
     try {
-        const res = await axios.get('http://localhost:8080/api/orders/promotions/active');
+        const res = await axios.get('/api/orders/promotions/active');
         setAvailableVouchers(res.data);
     } catch (error) { console.error("Lỗi tải voucher", error); }
   };
 
   const fetchReservations = useCallback(() => {
-    axios.get('http://localhost:8080/api/reservations')
+    axios.get('/api/reservations')
       .then(res => {
         const pending = res.data.filter(r => r.status === 'PENDING');
         setReservations(pending);
@@ -97,12 +97,12 @@ const PosPage = () => {
   }, []);
 
   const fetchOrderDetails = (orderId) => {
-    axios.get(`http://localhost:8080/api/orders/${orderId}/details`)
+    axios.get(`/api/orders/${orderId}/details`)
       .then(res => setOrderDetails(res.data));
   };
 
   const fetchOrderOfTable = (tableId) => {
-    axios.get(`http://localhost:8080/api/orders/table/${tableId}`)
+    axios.get(`/api/orders/table/${tableId}`)
       .then(res => {
         if (res.data) {
           setCurrentOrder(res.data);
@@ -168,7 +168,7 @@ const PosPage = () => {
     const phoneRegex = /^\d{10}$/;
     if (!phoneRegex.test(phoneSearch)) return alert("Vui lòng nhập đúng 10 số điện thoại!");
     
-    axios.get(`http://localhost:8080/api/customers/search?phone=${phoneSearch}`)
+    axios.get(`/api/customers/search?phone=${phoneSearch}`)
       .then(res => {
         if (res.data) {
           setCustomer(res.data);
@@ -178,7 +178,7 @@ const PosPage = () => {
           if(window.confirm("Khách hàng chưa tồn tại. Tạo mới ngay?")) {
             const name = prompt("Nhập tên khách hàng:");
             if(name) {
-              axios.post('http://localhost:8080/api/customers', { name, phone: phoneSearch, points: 0 })
+              axios.post('/api/customers', { name, phone: phoneSearch, points: 0 })
                 .then(res => setCustomer(res.data));
             }
           }
@@ -215,7 +215,7 @@ const PosPage = () => {
 
   const handleAssignReservation = () => {
     if (!selectedReservationId) return alert("Vui lòng chọn khách đặt!");
-    axios.post(`http://localhost:8080/api/tables/assign-reservation`, null, {
+    axios.post(`/api/tables/assign-reservation`, null, {
       params: { tableId: selectedTable.id, reservationId: selectedReservationId }
     }).then(() => {
       alert("Đã xếp bàn thành công!");
@@ -235,7 +235,7 @@ const PosPage = () => {
   const handleFreeTable = (e, tableId) => {
     e.stopPropagation();
     if(window.confirm("Hủy đặt bàn này và trả về trạng thái Trống?")) {
-      axios.post(`http://localhost:8080/api/tables/${tableId}/free`).then(() => fetchTables());
+      axios.post(`/api/tables/${tableId}/free`).then(() => fetchTables());
     }
   };
 
@@ -256,7 +256,7 @@ const PosPage = () => {
 
   const addToOrder = (product) => {
     const note = kitchenNote ? kitchenNote : ""; 
-    axios.post(`http://localhost:8080/api/orders/add`, null, {
+    axios.post(`/api/orders/add`, null, {
       params: { tableId: selectedTable.id, productId: product.id, quantity: 1, note: note }
     }).then(res => {
       setCurrentOrder(res.data);
@@ -267,7 +267,7 @@ const PosPage = () => {
 
   const handleRemoveItem = (detailId) => {
     if(window.confirm("Xóa món này khỏi đơn?")) {
-      axios.delete(`http://localhost:8080/api/orders/details/${detailId}`)
+      axios.delete(`/api/orders/details/${detailId}`)
         .then(res => {
           setCurrentOrder(res.data);
           fetchOrderDetails(res.data.id);
@@ -279,7 +279,7 @@ const PosPage = () => {
   const handleApplyVoucher = async () => {
     if (!currentOrder) return;
     try {
-        const res = await axios.post(`http://localhost:8080/api/orders/${currentOrder.id}/apply-voucher?code=${voucherCode}`);
+        const res = await axios.post(`/api/orders/${currentOrder.id}/apply-voucher?code=${voucherCode}`);
         setCurrentOrder(res.data); 
         alert(`Đã áp dụng mã ${voucherCode} thành công!`);
     } catch (error) {
@@ -288,7 +288,7 @@ const PosPage = () => {
   };
 
   const handleConfirmPayment = () => {
-    const url = `http://localhost:8080/api/orders/${currentOrder.id}/pay?customerId=${customer ? customer.id : ''}&pointsUsed=${pointsToUse}`;
+    const url = `/api/orders/${currentOrder.id}/pay?customerId=${customer ? customer.id : ''}&pointsUsed=${pointsToUse}`;
     axios.post(url)
       .then(() => { 
         alert("Thanh toán thành công! Bàn đã trống."); 

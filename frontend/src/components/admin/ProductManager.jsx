@@ -10,7 +10,7 @@ const ProductManager = () => {
   const [showAddModal, setShowAddModal] = useState(false); // 2. State mở modal thêm
 
   const fetchProducts = () => {
-    axios.get('http://localhost:8080/api/products')
+    axios.get('/api/products')
       .then(res => setProducts(res.data))
       .catch(err => console.error(err));
   };
@@ -19,7 +19,7 @@ const ProductManager = () => {
 
   const handleDelete = (id) => {
     if(window.confirm("Bạn có chắc muốn xóa món này không?")) {
-      axios.delete(`http://localhost:8080/api/products/${id}`)
+      axios.delete(`/api/products/${id}`)
         .then(() => { alert("Đã xóa thành công!"); fetchProducts(); })
         .catch(() => alert("Lỗi khi xóa!"));
     }

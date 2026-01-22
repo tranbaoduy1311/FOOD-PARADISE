@@ -7,7 +7,7 @@ const TableManager = () => {
 
   // Load danh sách bàn
   const fetchTables = () => {
-    axios.get('http://localhost:8080/api/tables')
+    axios.get('/api/tables')
       .then(res => setTables(res.data))
       .catch(err => console.error(err));
   };
@@ -19,7 +19,7 @@ const TableManager = () => {
   // Thêm bàn mới
   const handleAddTable = () => {
     if (!newTableName) return alert("Vui lòng nhập tên bàn!");
-    axios.post('http://localhost:8080/api/tables', { name: newTableName, status: "Trống" })
+    axios.post('/api/tables', { name: newTableName, status: "Trống" })
       .then(() => {
         setNewTableName("");
         fetchTables();
@@ -30,7 +30,7 @@ const TableManager = () => {
   // Xóa bàn
   const handleDelete = (id) => {
     if (window.confirm("Xóa bàn này?")) {
-      axios.delete(`http://localhost:8080/api/tables/${id}`)
+      axios.delete(`/api/tables/${id}`)
         .then(() => fetchTables());
     }
   };
