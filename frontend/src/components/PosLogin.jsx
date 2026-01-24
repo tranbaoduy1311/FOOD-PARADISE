@@ -11,7 +11,7 @@ const PosLogin = ({ onLoginSuccess }) => {
     setError("");
     if (!code) return setError("Vui lòng nhập mã nhân viên!");
 
-    axios.post(`http://localhost:8080/api/auth/login-pos?code=${code}`)
+    axios.post(`/api/auth/login-pos?code=${code}`)
       .then(res => {
         onLoginSuccess({ ...res.data, shift: shift });
       })

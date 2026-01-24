@@ -22,14 +22,14 @@ const Dashboard = () => {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/dashboard/stats')
+    axios.get('http://localhost:8080/api/dashboard/stats')
       .then(res => setStats(res.data))
       .catch(err => console.error(err));
   }, []);
 
   // 1. Hàm mở danh sách đơn hàng hôm nay
   const handleShowRevenueDetails = () => {
-    axios.get('/api/dashboard/orders/today')
+    axios.get('http://localhost:8080/api/dashboard/orders/today')
       .then(res => {
         setTodayOrders(res.data);
         setShowRevenueModal(true);
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   // 2. Hàm xem chi tiết món ăn của 1 đơn (Khi bấm vào dòng đơn hàng)
   const handleViewOrderItems = (orderId) => {
-    axios.get(`/api/orders/${orderId}/details`)
+    axios.get(`http://localhost:8080/api/orders/${orderId}/details`)
       .then(res => {
         setSelectedOrderDetails(res.data);
         setSelectedOrderId(orderId);
@@ -67,9 +67,6 @@ const Dashboard = () => {
             <p className="text-lg text-gray-200 mb-6">
               Hệ thống quản lý nhà hàng đang hoạt động. Kiểm tra doanh thu ngay bên dưới.
             </p>
-            <Link to="/pos" className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg inline-flex items-center gap-2">
-              🚀 Vào trang bán hàng
-            </Link>
           </div>
         </div>
       </div>

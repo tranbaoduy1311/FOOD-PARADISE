@@ -11,12 +11,12 @@ const RecipeModal = ({ product, onClose }) => {
 
   useEffect(() => {
     // Lấy danh sách kho
-    axios.get('/api/admin/ingredients')
+    axios.get('http://localhost:8080/api/admin/ingredients')
       .then(res => setAllIngredients(res.data))
       .catch(err => console.error(err));
 
     // Lấy công thức hiện tại
-    axios.get(`/api/recipes/${product.id}`)
+    axios.get(`http://localhost:8080/api/recipes/${product.id}`)
       .then(res => setRecipe(res.data))
       .catch(err => console.error(err));
   }, [product.id]);
@@ -28,7 +28,7 @@ const RecipeModal = ({ product, onClose }) => {
     }
 
     setIsLoadingAI(true);
-    axios.get(`/api/ai/suggest-recipe?dishName=${product.name}`)
+    axios.get(`http://localhost:8080/api/ai/suggest-recipe?dishName=${product.name}`)
       .then(res => {
         const aiSuggestions = res.data; 
         
@@ -91,7 +91,7 @@ const RecipeModal = ({ product, onClose }) => {
       return alert(`Vui lòng tạo các nguyên liệu mới này trong kho trước khi lưu công thức: \n- ${invalidItems.map(i => i.ingredient?.name).join("\n- ")}`);
     }
 
-    axios.post(`/api/recipes/${product.id}`, recipe)
+    axios.post(`http://localhost:8080/api/recipes/${product.id}`, recipe)
       .then(() => { alert("Đã lưu công thức thành công!"); onClose(); })
       .catch(err => {
         console.error(err);

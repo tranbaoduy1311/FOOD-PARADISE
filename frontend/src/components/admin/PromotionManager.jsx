@@ -24,7 +24,7 @@ const PromotionManager = () => {
     // --- HÀM TẢI DỮ LIỆU (Viết dạng hàm thường, không cần useCallback) ---
     const fetchPromotions = async () => {
         try {
-            const res = await axios.get('/api/admin/promotions');
+            const res = await axios.get('http://localhost:8080/api/admin/promotions');
             setPromotions(res.data);
         } catch (error) {
             console.error("Lỗi tải dữ liệu", error);
@@ -74,9 +74,9 @@ const PromotionManager = () => {
             if (!payload.endHour) payload.endHour = null;
 
             if (editingId) {
-                await axios.put(`/api/admin/promotions/${editingId}`, payload);
+                await axios.put(`http://localhost:8080/api/admin/promotions/${editingId}`, payload);
             } else {
-                await axios.post('/api/admin/promotions', payload);
+                await axios.post('http://localhost:8080/api/admin/promotions', payload);
             }
             setIsModalOpen(false);
             fetchPromotions(); // Gọi lại hàm để refresh danh sách
@@ -91,7 +91,7 @@ const PromotionManager = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Bạn chắc chắn muốn xóa mã này?")) {
             try {
-                await axios.delete(`/api/admin/promotions/${id}`);
+                await axios.delete(`http://localhost:8080/api/admin/promotions/${id}`);
                 fetchPromotions();
             } catch (error) {
                 console.error(error);

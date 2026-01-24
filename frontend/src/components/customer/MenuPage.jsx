@@ -10,8 +10,8 @@ const MenuPage = () => {
 
   // --- API CALLS ---
   useEffect(() => {
-    axios.get('/api/products').then(res => setProducts(res.data));
-    axios.get('/api/categories').then(res => setCategories(res.data));
+    axios.get('http://localhost:8080/api/products').then(res => setProducts(res.data));
+    axios.get('http://localhost:8080/api/categories').then(res => setCategories(res.data));
   }, []);
 
   // --- FILTER LOGIC ---

@@ -5,7 +5,7 @@ const AuditLogManager = () => {
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/admin/audit-logs')
+    axios.get('http://localhost:8080/api/admin/audit-logs')
       .then(res => setLogs(res.data))
       .catch(err => console.error(err));
   }, []);

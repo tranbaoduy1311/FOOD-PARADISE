@@ -32,7 +32,7 @@ const BookingPage = () => {
       // hiện tại ta gửi các trường cơ bản trước.
     };
 
-    axios.post('/api/reservations', dataToSend)
+    axios.post('http://localhost:8080/api/reservations', dataToSend)
       .then(() => {
         alert("🎉 Đặt bàn thành công! Chúng tôi sẽ liên hệ xác nhận sớm.");
         setFormData({ ...formData, customerName: '', phone: '', note: '' });

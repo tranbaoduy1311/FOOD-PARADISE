@@ -8,7 +8,7 @@ const CategoryManager = () => {
   const [editName, setEditName] = useState("");
 
   const fetchCategories = () => {
-    axios.get('/api/categories')
+    axios.get('http://localhost:8080/api/categories')
       .then(res => setCategories(res.data))
       .catch(err => console.error(err));
   };
@@ -17,7 +17,7 @@ const CategoryManager = () => {
 
   const handleAdd = () => {
     if (!newCategoryName.trim()) return alert("Tên danh mục không được để trống!");
-    axios.post('/api/categories', { name: newCategoryName })
+    axios.post('http://localhost:8080/api/categories', { name: newCategoryName })
       .then(() => {
         setNewCategoryName("");
         fetchCategories();
@@ -28,7 +28,7 @@ const CategoryManager = () => {
   // Chức năng Sửa
   const handleUpdate = (id) => {
     if (!editName.trim()) return alert("Tên không được để trống!");
-    axios.post('/api/categories', { id, name: editName }) // Spring Boot save() sẽ update nếu có ID
+    axios.post('http://localhost:8080/api/categories', { id, name: editName }) // Spring Boot save() sẽ update nếu có ID
       .then(() => {
         setEditingId(null);
         fetchCategories();
@@ -38,7 +38,7 @@ const CategoryManager = () => {
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn chắc chắn muốn xóa danh mục này?")) {
-      axios.delete(`/api/categories/${id}`)
+      axios.delete(`http://localhost:8080/api/categories/${id}`)
         .then(() => {
           alert("Đã xóa thành công!");
           fetchCategories();
