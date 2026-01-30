@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import '../styles/pos.css';
 import PosLogin from './PosLogin';
-import PosOrderInterface from './PosOrderInterface'; // Import component mới
+import PosOrderInterface from './PosOrderInterface'; 
 
 const PosPage = () => {
   // --- 1. KHỞI TẠO STATE ---

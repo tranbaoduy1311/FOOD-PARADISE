@@ -6,7 +6,7 @@ const TimekeepingManager = () => {
   const [attendanceHistory, setAttendanceHistory] = useState([]);
   const [workingStatus, setWorkingStatus] = useState({});
 
-  // --- 1. ĐỊNH NGHĨA HÀM LẤY DỮ LIỆU ---
+  // --- 1. ĐỊNH NGHĨA HÀM LẤY DỮ LIỆU --- CHÁMCÔNG VÀ NHÂN VIÊN
   const fetchData = async () => {
     try {
       // Lấy danh sách nhân viên
@@ -35,8 +35,7 @@ const TimekeepingManager = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Mảng rỗng để chỉ chạy 1 lần khi vào trang
-
+  }, []); 
   // Xử lý Check-in
   const handleCheckIn = (empId) => {
     axios.post(`http://localhost:8080/api/attendance/check-in?employeeId=${empId}`)
@@ -45,7 +44,7 @@ const TimekeepingManager = () => {
         fetchData();
       })
       .catch(err => {
-        console.error(err); // Sửa lỗi 'err' bằng cách in nó ra
+        console.error(err); 
         alert(err.response?.data?.message || "Lỗi Check-in");
       });
   };
@@ -61,7 +60,7 @@ const TimekeepingManager = () => {
         fetchData();
       })
       .catch(err => {
-        console.error(err); // Sửa lỗi 'err' bằng cách in nó ra
+        console.error(err);
         alert("Lỗi Check-out");
       });
   };

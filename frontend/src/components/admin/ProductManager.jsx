@@ -10,11 +10,10 @@ const ProductManager = () => {
   
   // State quản lý Modal
   const [showAddModal, setShowAddModal] = useState(false); 
-  const [editingProduct, setEditingProduct] = useState(null); // Lưu món ăn đang được chọn để sửa
+  const [editingProduct, setEditingProduct] = useState(null); 
 
   // Hàm lấy danh sách món ăn từ Backend
   const fetchProducts = () => {
-    // Lưu ý: Nếu bạn đã sửa baseURL ở main.jsx thì chỉ cần gọi axios.get('/api/products')
     axios.get('http://localhost:8080/api/products')
       .then(res => setProducts(res.data))
       .catch(err => console.error("Lỗi tải danh sách món ăn:", err));
@@ -43,7 +42,6 @@ const ProductManager = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* HEADER */}
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="admin-title">Quản lý Món ăn</h1>
@@ -52,7 +50,7 @@ const ProductManager = () => {
         
         <button 
           onClick={() => {
-            setEditingProduct(null); // Đảm bảo không có dữ liệu cũ khi thêm mới
+            setEditingProduct(null); 
             setShowAddModal(true);
           }}
           className="admin-btn admin-btn-create flex items-center"
@@ -146,7 +144,7 @@ const ProductManager = () => {
       {/* MODAL THÊM / SỬA MÓN ĂN */}
       {(showAddModal || editingProduct) && (
         <ProductModal 
-          product={editingProduct} // Nếu là sửa thì truyền object p, nếu thêm mới thì truyền null
+          product={editingProduct} 
           onClose={() => {
             setShowAddModal(false);
             setEditingProduct(null);

@@ -132,7 +132,6 @@ const AdminLayout = () => {
           </div>
         </header>
 
-        {/* Nội dung thay đổi */}
         <main className="flex-1 overflow-y-auto p-8 bg-gray-50">
           <Outlet />
         </main>

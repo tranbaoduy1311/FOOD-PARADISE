@@ -7,8 +7,6 @@ const BillModal = ({ order, items, table, onClose, onConfirm }) => {
   const ACCOUNT_NO = "0369203304"; 
   const ACCOUNT_NAME = "TRAN BAO DUY"; 
   
-  // Lấy giá cuối cùng (Đã được tính toán bên PosPage và truyền qua prop 'order')
-  // Nếu finalPrice chưa có (null/undefined) thì dùng totalPrice
   const finalAmount = order.finalPrice ?? order.totalPrice;
 
   // Tạo QR Code dựa trên giá cuối cùng

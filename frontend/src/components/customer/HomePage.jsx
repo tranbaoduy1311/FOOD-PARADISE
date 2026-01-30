@@ -6,7 +6,7 @@ const HomePage = () => {
   // Danh sách món nổi bật (Dữ liệu giả lập)
   const featuredDishes = [
     { id: 1, name: "Bò Beefsteak Thượng Hạng", price: "189.000", img: "https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=800&auto=format&fit=crop", tag: "Best Seller" },
-    { id: 2, name: "Mỳ Ý Sốt Kem Nấm", price: "120.000", img: "https://images.unsplash.com/photo-1551183053-bf91b1d511a3?q=80&w=800&auto=format&fit=crop", tag: "Mới" },
+    { id: 2, name: "Mỳ Ý Sốt Kem Nấm", price: "120.000", img: "https://bizweb.dktcdn.net/100/021/974/products/hinh-mi-y-xot-bo-bam.jpg?v=1585211671827", tag: "Mới" },
     { id: 3, name: "Salad Cá Ngừ Tươi", price: "85.000", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop", tag: "Healthy" },
     { id: 4, name: "Pizza Hải Sản Nhiệt Đới", price: "250.000", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop", tag: "Hot" },
   ];

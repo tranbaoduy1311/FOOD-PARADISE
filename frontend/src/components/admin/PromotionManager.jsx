@@ -5,7 +5,7 @@ const PromotionManager = () => {
     const [promotions, setPromotions] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     
-    // State cho Form
+    // State cho Form MÃ KHUYẾN MÃI
     const [formData, setFormData] = useState({
         code: '',
         description: '',
@@ -21,7 +21,6 @@ const PromotionManager = () => {
     });
     const [editingId, setEditingId] = useState(null);
 
-    // --- HÀM TẢI DỮ LIỆU (Viết dạng hàm thường, không cần useCallback) ---
     const fetchPromotions = async () => {
         try {
             const res = await axios.get('http://localhost:8080/api/admin/promotions');
@@ -31,12 +30,10 @@ const PromotionManager = () => {
         }
     };
 
-    // --- USE EFFECT: Chỉ chạy 1 lần khi mở trang ---
     useEffect(() => {
         fetchPromotions();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); // Mảng rỗng [] đảm bảo chỉ chạy 1 lần, tránh lặp vô tận
-
+    }, []); 
     // Xử lý Input thay đổi
     const handleChange = (e) => {
         const { name, value } = e.target;

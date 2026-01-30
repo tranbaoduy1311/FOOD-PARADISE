@@ -30,7 +30,7 @@ const MenuPage = () => {
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1920&auto=format&fit=crop')" }}
         ></div>
-        <div className="absolute inset-0 bg-black/60"></div> {/* Lớp phủ tối */}
+        <div className="absolute inset-0 bg-black/60"></div> 
         
         <div className="relative z-10 text-center text-white px-4 animate-fade-in-up">
           <span className="text-orange-400 font-bold tracking-widest uppercase text-sm mb-2 block">Khám phá ẩm thực</span>
@@ -45,7 +45,7 @@ const MenuPage = () => {
 
       <div className="max-w-7xl mx-auto px-4 -mt-8 relative z-20">
         
-        {/* --- 2. THANH TÌM KIẾM & DANH MỤC (Nổi lên trên) --- */}
+        {/* --- 2. THANH TÌM KIẾM & DANH MỤC  */}
         <div className="bg-white rounded-2xl shadow-xl p-4 md:p-6 flex flex-col md:flex-row gap-6 items-center justify-between border border-gray-100">
           
           {/* Bộ lọc danh mục */}

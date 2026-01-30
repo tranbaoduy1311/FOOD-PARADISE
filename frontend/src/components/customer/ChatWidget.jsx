@@ -23,45 +23,22 @@ const ChatWidget = () => {
     setInput("");
     setIsTyping(true);
 
-    // --- CẤU HÌNH GỌI TRỰC TIẾP GOOGLE ---
-    // Key lấy chính xác từ ảnh bạn gửi
-    const API_KEY = "AlzaSyC4UOi5nla3ZV5CzmA7ECEJuqH-bQ3hwJQ"; 
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
-    // Kịch bản cho nhân viên ảo
-    const systemPrompt = "Bạn là nhân viên phục vụ ảo của nhà hàng 'Food Paradise'. "
-        + "Phong cách: Thân thiện, hài hước, dùng nhiều emoji. "
-        + "Thông tin quán: Mở cửa 8h-22h. Địa chỉ: 123 Quận 1, TP.HCM. "
-        + "Menu nổi bật: Cơm tấm, Phở bò, Trà sữa. "
-        + "Nhiệm vụ: Trả lời câu hỏi của khách hàng ngắn gọn (dưới 100 từ).";
-
     try {
-      // 2. Gọi trực tiếp sang Google bằng fetch (tránh lỗi axios/backend)
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{ text: systemPrompt + "\nKhách hỏi: " + userMsg }]
-          }]
-        })
-      });
+      /**
+       * GỌI ĐẾN BACKEND JAVA (localhost:8080)
+       * Không gọi trực tiếp Google ở đây để bảo mật API Key
+       */
+      const response = await fetch(`http://localhost:8080/api/ai/chat?message=${encodeURIComponent(userMsg)}`);
 
       if (!response.ok) {
-        throw new Error(`Lỗi kết nối: ${response.status}`);
+        throw new Error(`Lỗi kết nối server: ${response.status}`);
       }
 
-      const data = await response.json();
+      // Backend Java của bạn trả về String thuần túy (ResponseEntity.ok(text))
+      const aiResponse = await response.text();
 
-      // 3. Lấy câu trả lời từ Google
-      if (data.candidates && data.candidates.length > 0) {
-          const aiResponse = data.candidates[0].content.parts[0].text;
-          setMessages(prev => [...prev, { sender: 'bot', text: aiResponse }]);
-      } else {
-          setMessages(prev => [...prev, { sender: 'bot', text: "Xin lỗi, tôi chưa hiểu ý bạn lắm 🤔" }]);
-      }
+      // 2. Hiển thị câu trả lời từ AI
+      setMessages(prev => [...prev, { sender: 'bot', text: aiResponse }]);
 
     } catch (error) {
       console.error("Lỗi gọi AI:", error);
@@ -121,7 +98,7 @@ const ChatWidget = () => {
               placeholder="Hỏi gì đó..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             />
             <button 
               onClick={handleSend}

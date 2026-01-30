@@ -41,7 +41,6 @@ const RecipeModal = ({ product, onClose }) => {
         // ------------------------------
 
         const mappedRecipe = aiSuggestions.map(aiItem => {
-          // Tìm xem nguyên liệu AI gợi ý có trong kho chưa (So sánh tên gần đúng)
           const foundInDb = allIngredients.find(ing => 
             ing.name.toLowerCase().includes(aiItem.name.toLowerCase()) || 
             aiItem.name.toLowerCase().includes(ing.name.toLowerCase())
@@ -50,7 +49,6 @@ const RecipeModal = ({ product, onClose }) => {
           if (foundInDb) {
             return { ingredient: foundInDb, quantityRequired: aiItem.quantity };
           } else {
-            // Nếu chưa có, tạo đối tượng tạm với id = null để đánh dấu là "Mới"
             return {
               ingredient: { id: null, name: aiItem.name + " (Mới)", unit: aiItem.unit },
               quantityRequired: aiItem.quantity

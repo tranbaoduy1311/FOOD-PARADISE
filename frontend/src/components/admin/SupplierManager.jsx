@@ -27,7 +27,6 @@ const SupplierManager = () => {
     // --- 2. GỌI HÀM TRONG USE EFFECT (KÈM DÒNG TẮT CẢNH BÁO) ---
     useEffect(() => {
         fetchSuppliers();
-        // Dòng dưới đây cực kỳ quan trọng: Nó chặn Linter báo lỗi dependency
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); 
 

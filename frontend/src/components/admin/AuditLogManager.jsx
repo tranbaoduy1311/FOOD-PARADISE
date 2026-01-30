@@ -10,7 +10,6 @@ const AuditLogManager = () => {
       .catch(err => console.error(err));
   }, []);
 
-  // Hàm format màu sắc cho từng loại hành động
   const getActionColor = (action) => {
     if (action.includes('DELETE')) return 'text-red-600 bg-red-50';
     if (action.includes('IMPORT')) return 'text-green-600 bg-green-50';
